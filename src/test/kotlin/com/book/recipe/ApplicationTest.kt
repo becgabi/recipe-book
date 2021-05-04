@@ -1,6 +1,6 @@
 package com.book.recipe
 
-import com.book.recipe.plugins.configureRouting
+import com.book.recipe.route.configureRouting
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import kotlin.test.Test

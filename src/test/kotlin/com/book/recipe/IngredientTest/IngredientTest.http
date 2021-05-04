@@ -1,0 +1,71 @@
+POST http://127.0.0.1:8080/ingredients
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Chicken breast",
+  "nutritionFact": {
+    "id": 1,
+    "calories": 120,
+    "fat": 2.6,
+    "protein": 22.5,
+    "carbs": 0,
+    "sugar": 0
+  }
+}
+
+###
+POST http://127.0.0.1:8080/ingredients
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "Basmati rice",
+  "nutritionFact": {
+    "id": 2,
+    "calories": 360,
+    "fat": 3,
+    "protein": 10,
+    "carbs": 80,
+    "sugar": 10
+  }
+}
+
+###
+GET http://127.0.0.1:8080/ingredients/search/chicken
+
+###
+GET http://127.0.0.1:8080/ingredients
+Accept: application/json
+
+###
+GET http://127.0.0.1:8080/ingredients/1
+
+###
+GET http://127.0.0.1:8080/ingredients/2
+
+###
+PUT http://127.0.0.1:8080/ingredients/2
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "Basmati rice",
+  "nutritionFact": {
+    "id": 2,
+    "calories": 360,
+    "fat": 3,
+    "protein": 10,
+    "carbs": 80,
+    "sugar": 0
+  }
+}
+
+###
+GET http://127.0.0.1:8080/ingredients/1
+
+###
+DELETE http://127.0.0.1:8080/ingredients/1
+
+###
+DELETE http://127.0.0.1:8080/ingredients/2
