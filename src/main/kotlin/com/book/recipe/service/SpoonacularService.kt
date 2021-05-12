@@ -43,14 +43,15 @@ class SpoonacularService {
     }
 
     private fun mapToInternalIngredient(ingredient: SpoonacularIngredient): Ingredient {
-        val nutritionFact = NutritionFact()
-        ingredient.nutrition?.nutrients?.forEach { nutrient ->
-            when (nutrient.name) {
-                "Calories" -> nutritionFact.calories = nutrient.amount
-                "Fat" -> nutritionFact.fat = nutrient.amount
-                "Carbohydrates" -> nutritionFact.carbs = nutrient.amount
-                "Sugar" -> nutritionFact.sugar = nutrient.amount
-                "Protein" -> nutritionFact.protein = nutrient.amount
+        val nutritionFact = NutritionFact().apply {
+            ingredient.nutrition?.nutrients?.forEach { nutrient ->
+                when (nutrient.name) {
+                    "Calories" -> calories = nutrient.amount
+                    "Fat" -> fat = nutrient.amount
+                    "Carbohydrates" -> carbs = nutrient.amount
+                    "Sugar" -> sugar = nutrient.amount
+                    "Protein" -> protein = nutrient.amount
+                }
             }
         }
         return Ingredient(name = ingredient.name, nutritionFact = nutritionFact)

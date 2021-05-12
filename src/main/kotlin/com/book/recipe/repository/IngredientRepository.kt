@@ -11,9 +11,8 @@ class IngredientRepository {
 
     suspend fun search(query: String): List<Ingredient> = newSuspendedTransaction {
         IngredientEntity
-            .find { Ingredients.name.lowerCase() like "%${query.toLowerCase()}%" }
+            .find { Ingredients.name.lowerCase() like "%${query.lowercase()}%" }
             .map { it.toIngredient() }
-            .toList()
     }
 
     suspend fun findAll(): List<Ingredient> = newSuspendedTransaction {
