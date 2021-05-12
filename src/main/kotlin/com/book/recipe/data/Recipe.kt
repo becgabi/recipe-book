@@ -67,3 +67,9 @@ object RecipeRecipeIngredients : Table() {
     val recipeIngredient = reference("recipe_ingredient", RecipeIngredients)
     override val primaryKey = PrimaryKey(recipe, recipeIngredient)
 }
+
+@Serializable
+class SearchRequest(
+    val query: String = "",
+    val labels: List<Label> = emptyList()
+)

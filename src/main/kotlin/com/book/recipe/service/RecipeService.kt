@@ -1,11 +1,16 @@
 package com.book.recipe.service
 
 import com.book.recipe.data.Recipe
+import com.book.recipe.data.SearchRequest
 import com.book.recipe.repository.RecipeRepository
 
 class RecipeService(
     private val recipeRepository: RecipeRepository,
 ) {
+
+    suspend fun search(request: SearchRequest): List<Recipe> {
+        return recipeRepository.search(request).sortedBy { it.name }
+    }
 
     suspend fun findAll(): List<Recipe> {
         return recipeRepository.findAll()

@@ -2,9 +2,23 @@ package com.book.recipe.repository
 
 import com.book.recipe.data.*
 import org.jetbrains.exposed.sql.SizedCollection
+import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.lowerCase
+import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 
 class RecipeRepository {
+
+    suspend fun search(request: SearchRequest): List<Recipe> = newSuspendedTransaction {
+        val labels = request.labels.ifEmpty { Label.values().toList() }
+        val query = Recipes.innerJoin(RecipeLabels).innerJoin(Labels)
+            .slice(Recipes.columns)
+            .select {
+                Recipes.name.lowerCase() like "%${request.query.lowercase()}%" and (Labels.name inList labels)
+            }
+            .withDistinct()
+        RecipeEntity.wrapRows(query).map { it.toRecipe() }.toList()
+    }
 
     suspend fun findAll(): List<Recipe> = newSuspendedTransaction {
         RecipeEntity.all().map(RecipeEntity::toRecipe)
