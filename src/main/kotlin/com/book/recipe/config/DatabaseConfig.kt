@@ -34,6 +34,8 @@ private fun createTables() = transaction {
 
 fun createTestData() {
     transaction {
-        Label.values().forEach { LabelEntity.new { name = it } }
+        if (LabelEntity.all().empty()) {
+            Label.values().forEach { LabelEntity.new { name = it } }
+        }
     }
 }

@@ -2,14 +2,14 @@ package com.book.recipe.route
 
 import com.book.recipe.data.Ingredient
 import com.book.recipe.service.IngredientService
+import com.book.recipe.util.getIdParamOrNull
+import com.book.recipe.util.respondBadRequest
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import org.koin.ktor.ext.inject
-
-private const val MISSING_ID = "Missing or malformed id"
 
 fun Route.registerIngredientRoutes() {
     route("/ingredients") {
@@ -31,18 +31,12 @@ fun Route.ingredientRouting() {
     }
 
     get("{id}") {
-        val id = call.parameters["id"]?.toIntOrNull() ?: return@get call.respondText(
-            MISSING_ID,
-            status = HttpStatusCode.BadRequest
-        )
+        val id = getIdParamOrNull() ?: return@get respondBadRequest()
         call.respond(service.getOne(id))
     }
 
     put("{id}") {
-        val id = call.parameters["id"]?.toIntOrNull() ?: return@put call.respondText(
-            MISSING_ID,
-            status = HttpStatusCode.BadRequest
-        )
+        val id = getIdParamOrNull() ?: return@put respondBadRequest()
         val request = call.receive<Ingredient>()
         service.update(id, request)
         call.respond(HttpStatusCode.OK)
@@ -54,10 +48,7 @@ fun Route.ingredientRouting() {
     }
 
     delete("{id}") {
-        val id = call.parameters["id"]?.toIntOrNull() ?: return@delete call.respondText(
-            MISSING_ID,
-            status = HttpStatusCode.BadRequest
-        )
+        val id = getIdParamOrNull() ?: return@delete respondBadRequest()
         service.delete(id)
         call.respond(HttpStatusCode.NoContent)
     }
