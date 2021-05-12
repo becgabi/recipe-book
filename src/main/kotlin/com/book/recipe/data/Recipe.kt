@@ -27,7 +27,7 @@ class RecipeEntity(id: EntityID<Int>) : IntEntity(id) {
         id = id.value,
         name = name,
         description = description,
-        portion = portion,
+        portion = portion.toFloat(),
         labels = labels.map { it.toLabel() },
         recipeIngredients = recipeIngredients.map { it.toRecipeIngredient() }
     )
@@ -40,7 +40,7 @@ class RecipeEntity(id: EntityID<Int>) : IntEntity(id) {
         name = recipe.name
         name = recipe.name
         description = recipe.description
-        portion = recipe.portion
+        portion = recipe.portion.toInt()
         labels = labelEntities
         recipeIngredients = recipeIngredientEntities
     }
@@ -51,7 +51,7 @@ data class Recipe(
     val id: Int? = null,
     val name: String,
     val description: String,
-    val portion: Int,
+    val portion: Float,
     val labels: List<Label>,
     val recipeIngredients: List<RecipeIngredient>
 )

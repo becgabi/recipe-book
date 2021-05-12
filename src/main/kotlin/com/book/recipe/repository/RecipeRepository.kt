@@ -36,7 +36,7 @@ class RecipeRepository {
         RecipeEntity.new(recipe.id) {
             name = recipe.name
             description = recipe.description
-            portion = recipe.portion
+            portion = recipe.portion.toInt()
         }.also {
             it.recipeIngredients = createRecipeIngredients(recipe)
             it.labels = getLabels(recipe)

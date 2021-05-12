@@ -38,4 +38,13 @@ class RecipeService(
         }
     }
 
+    suspend fun getPortion(id: Int, portionNumber: Float): Recipe {
+        val recipe = recipeRepository.getOne(id)
+        val ingredients = recipe.recipeIngredients.map { recipeIngredient ->
+            val newAmountInGram = (recipeIngredient.amountInGram * portionNumber / recipe.portion).toInt()
+            recipeIngredient.copy(amountInGram = newAmountInGram)
+        }
+        return recipe.copy(portion = portionNumber, recipeIngredients = ingredients)
+    }
+
 }
