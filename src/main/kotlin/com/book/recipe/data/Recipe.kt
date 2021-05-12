@@ -56,6 +56,13 @@ data class Recipe(
     val recipeIngredients: List<RecipeIngredient>
 )
 
+@Serializable
+data class RecipeSummary(
+    val recipe: Recipe,
+    val sumNutritionFact: NutritionFact,
+    val sumWeightInGram: Int
+)
+
 object RecipeLabels : Table() {
     val recipe = reference("recipe", Recipes)
     val label = reference("label", Labels)

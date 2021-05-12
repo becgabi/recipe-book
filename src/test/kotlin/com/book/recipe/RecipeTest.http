@@ -14,12 +14,16 @@ Content-Type: application/json
   ],
   "recipeIngredients": [
     {
-      "amountInGram": 500,
-      "ingredientId": 1
+      "weightInGram": 500,
+      "ingredient": {
+        "id": 1
+      }
     },
     {
-      "amountInGram": 300,
-      "ingredientId": 2
+      "weightInGram": 300,
+      "ingredient": {
+        "id": 2
+      }
     }
   ]
 }
@@ -42,12 +46,16 @@ Content-Type: application/json
   ],
   "recipeIngredients": [
     {
-      "amountInGram": 550,
-      "ingredientId": 1
+      "weightInGram": 550,
+      "ingredient": {
+        "id": 1
+      }
     },
     {
-      "amountInGram": 280,
-      "ingredientId": 2
+      "weightInGram": 280,
+      "ingredient": {
+        "id": 2
+      }
     }
   ]
 }

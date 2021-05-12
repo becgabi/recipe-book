@@ -27,6 +27,6 @@ class IngredientEntity(id: EntityID<Int>) : IntEntity(id) {
 @Serializable
 data class Ingredient(
     val id: Int? = null,
-    val name: String,
-    val nutritionFact: NutritionFact
+    val name: String = "",
+    val nutritionFact: NutritionFact = NutritionFact()
 )

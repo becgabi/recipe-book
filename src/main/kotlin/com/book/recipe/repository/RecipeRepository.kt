@@ -66,8 +66,9 @@ class RecipeRepository {
     private fun createRecipeIngredients(recipe: Recipe): SizedCollection<RecipeIngredientEntity> {
         return SizedCollection(recipe.recipeIngredients.map { recipeIngredient ->
             RecipeIngredientEntity.new(recipeIngredient.id) {
-                amountInGram = recipeIngredient.amountInGram
-                ingredientId = recipeIngredient.ingredientId
+                weightInGram = recipeIngredient.weightInGram
+            }.also {
+                it.ingredient = IngredientEntity[recipeIngredient.ingredient.id!!]
             }
         })
     }
