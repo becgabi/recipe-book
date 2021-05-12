@@ -1,0 +1,59 @@
+###
+POST http://127.0.0.1:8080/recipes
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Chicken with rice",
+  "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
+  "portion": 3,
+  "labels": [
+    "LOW_CARB",
+    "PALEO",
+    "SUGAR_FREE"
+  ],
+  "recipeIngredients": [
+    {
+      "amountInGram": 500,
+      "ingredientId": 1
+    },
+    {
+      "amountInGram": 300,
+      "ingredientId": 2
+    }
+  ]
+}
+
+###
+GET http://127.0.0.1:8080/recipes
+
+###
+PUT http://127.0.0.1:8080/recipes/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Chicken breast with rice",
+  "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
+  "portion": 4,
+  "labels": [
+    "GLUTEN_FREE",
+    "SUGAR_FREE"
+  ],
+  "recipeIngredients": [
+    {
+      "amountInGram": 550,
+      "ingredientId": 1
+    },
+    {
+      "amountInGram": 280,
+      "ingredientId": 2
+    }
+  ]
+}
+
+###
+GET http://127.0.0.1:8080/recipes/1
+
+###
+DELETE http://127.0.0.1:8080/recipes/1

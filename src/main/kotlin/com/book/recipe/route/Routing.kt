@@ -7,5 +7,6 @@ fun Application.configureRouting() {
 
     routing {
         registerIngredientRoutes()
+        registerRecipeRoutes()
     }
 }
