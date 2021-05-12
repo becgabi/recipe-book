@@ -1,0 +1,67 @@
+###
+POST http://127.0.0.1:8080/recipes
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "Chicken with lots of rice",
+  "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
+  "portion": 3,
+  "labels": [
+    "LOW_CARB",
+    "PALEO",
+    "SUGAR_FREE"
+  ],
+  "recipeIngredients": [
+    {
+      "amountInGram": 500,
+      "ingredientId": 1
+    },
+    {
+      "amountInGram": 400,
+      "ingredientId": 2
+    }
+  ]
+}
+
+###
+GET http://127.0.0.1:8080/recipes/search
+Content-Type: application/json
+
+{
+  "query": "chicken",
+  "labels": [
+    "GLUTEN_FREE"
+  ]
+}
+
+###
+GET http://127.0.0.1:8080/recipes/search
+Content-Type: application/json
+
+{
+  "query": "rice"
+}
+
+###
+GET http://127.0.0.1:8080/recipes/search
+Content-Type: application/json
+
+{
+  "labels": [
+    "SUGAR_FREE"
+  ]
+}
+
+###
+GET http://127.0.0.1:8080/recipes/search
+Content-Type: application/json
+
+{
+  "labels": [
+    "PALEO"
+  ]
+}
+
+###
+DELETE http://127.0.0.1:8080/recipes/2

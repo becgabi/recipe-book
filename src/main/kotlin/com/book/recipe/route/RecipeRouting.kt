@@ -1,6 +1,7 @@
 package com.book.recipe.route
 
 import com.book.recipe.data.Recipe
+import com.book.recipe.data.SearchRequest
 import com.book.recipe.service.RecipeService
 import io.ktor.application.*
 import io.ktor.http.*
@@ -20,6 +21,11 @@ fun Route.registerRecipeRoutes() {
 fun Route.recipeRouting() {
 
     val service: RecipeService by inject()
+
+    get("search") {
+        val searchRequest = call.receive<SearchRequest>()
+        call.respond(service.search(searchRequest))
+    }
 
     get {
         call.respond(service.findAll())
