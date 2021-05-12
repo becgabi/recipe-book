@@ -14,24 +14,28 @@ Content-Type: application/json
   ],
   "recipeIngredients": [
     {
-      "amountInGram": 500,
-      "ingredientId": 1
+      "weightInGram": 500,
+      "ingredient": {
+        "id": 1
+      }
     },
     {
-      "amountInGram": 400,
-      "ingredientId": 2
+      "weightInGram": 400,
+      "ingredient": {
+        "id": 2
+      }
     }
   ]
 }
 
 ###
-GET http://127.0.0.1:8080/recipes/1/portions/1
+GET http://127.0.0.1:8080/recipes/3/portions/1
 
 ###
-GET http://127.0.0.1:8080/recipes/1/portions/0.5
+GET http://127.0.0.1:8080/recipes/3/portions/0.5
 
 ###
-GET http://127.0.0.1:8080/recipes/1/portions/7.5
+GET http://127.0.0.1:8080/recipes/3/portions/7.5
 
 ###
 DELETE http://127.0.0.1:8080/recipes/2

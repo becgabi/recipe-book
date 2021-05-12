@@ -1,12 +1,15 @@
 package com.book.recipe.service
 
-import com.book.recipe.data.Recipe
-import com.book.recipe.data.SearchRequest
+import com.book.recipe.data.*
 import com.book.recipe.repository.RecipeRepository
 
 class RecipeService(
     private val recipeRepository: RecipeRepository,
 ) {
+
+    companion object {
+        private const val NUTRIENT_VALUE_PER_GRAM = 100F
+    }
 
     suspend fun search(request: SearchRequest): List<Recipe> {
         return recipeRepository.search(request).sortedBy { it.name }
@@ -38,13 +41,25 @@ class RecipeService(
         }
     }
 
-    suspend fun getPortion(id: Int, portionNumber: Float): Recipe {
+    suspend fun getPortion(id: Int, portionNumber: Float): RecipeSummary {
         val recipe = recipeRepository.getOne(id)
         val ingredients = recipe.recipeIngredients.map { recipeIngredient ->
-            val newAmountInGram = (recipeIngredient.amountInGram * portionNumber / recipe.portion).toInt()
-            recipeIngredient.copy(amountInGram = newAmountInGram)
+            calculateNutrition(recipeIngredient, portionNumber, recipe)
         }
-        return recipe.copy(portion = portionNumber, recipeIngredients = ingredients)
+        return recipe.copy(portion = portionNumber, recipeIngredients = ingredients).toSummary()
+    }
+
+    private fun calculateNutrition(
+        recipeIngredient: RecipeIngredient,
+        portionNumber: Float,
+        recipe: Recipe
+    ): RecipeIngredient {
+        val newWeightInGram = (recipeIngredient.weightInGram * portionNumber / recipe.portion).toInt()
+        val newNutritionFact = recipeIngredient.ingredient.nutritionFact * (newWeightInGram / NUTRIENT_VALUE_PER_GRAM)
+        return recipeIngredient.copy(
+            weightInGram = newWeightInGram,
+            ingredient = recipeIngredient.ingredient.copy(nutritionFact = newNutritionFact)
+        )
     }
 
 }

@@ -9,17 +9,20 @@ Content-Type: application/json
   "portion": 3,
   "labels": [
     "LOW_CARB",
-    "PALEO",
-    "SUGAR_FREE"
+    "PALEO"
   ],
   "recipeIngredients": [
     {
-      "amountInGram": 500,
-      "ingredientId": 1
+      "weightInGram": 500,
+      "ingredient": {
+        "id": 1
+      }
     },
     {
-      "amountInGram": 400,
-      "ingredientId": 2
+      "weightInGram": 400,
+      "ingredient": {
+        "id": 2
+      }
     }
   ]
 }
